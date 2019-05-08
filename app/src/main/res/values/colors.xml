@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2D9CDB</color>
+    <color name="colorPrimaryDark">#298ec8</color>
+    <color name="colorAccent">#fb6542</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#111111</color>
+    <color name="red">#EB5757</color>
+    <color name="light_grey">#F2F2F2</color>
+    <color name="grey">#BDBDBD</color>
+
+    <color name="pezzottaite">#F62A61</color>
+    <color name="rubellite">#D10056</color>
+    <color name="ruby">#9B111E</color>
+
+    <color name="red_diamond">#892D32</color>
+    <color name="coral">#F88379</color>
+    <color name="sunstone">#FF7F50</color>
+
+    <color name="copper">#B87333</color>
+    <color name="amber">#FFBF00</color>
+    <color name="gold">#E8B923</color>
+
+    <color name="emerald">#50C878</color>
+    <color name="jade">#00A86B</color>
+    <color name="malachite">#3C7A6E</color>
+
+    <color name="zircon">#007082</color>
+    <color name="sapphire">#0F52BA</color>
+    <color name="azurite">#1668CC</color>
+
+
+    <color name="topaz">#5AC1E3</color>
+    <color name="amethyst">#A96FE3</color>
+    <color name="charoite">#804CA7</color>
+
+    <color name="tanzanite">#593EFF</color>
+    <color name="onyx">#353839</color>
+    <color name="obsidian">#111111</color>
+
+
+</resources>

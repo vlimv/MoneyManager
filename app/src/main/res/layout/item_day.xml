@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:padding="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:elevation="2dp"
+    android:background="@drawable/background_white_rectangle">
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="25 сентября, Вторник"
+        fontPath="fonts/Montserrat-Medium.ttf"/>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        layout="@layout/layout_expense"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        layout="@layout/layout_expense"/>
+
+    <TextView
+        android:id="@+id/overall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textAlignment="viewEnd"
+        android:text="Потрачено: -111.10 ¥"
+        android:layout_marginEnd="8dp"
+        fontPath="fonts/Montserrat-Medium.ttf"/>
+</LinearLayout>

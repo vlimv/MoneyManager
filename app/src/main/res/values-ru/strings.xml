@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Money Manager</string>
+
+
+    <string name="main_page">Главная</string>
+    <string name="categories">Категории</string>
+    <string name="debts">Долги</string>
+    <string name="settings">Настройки</string>
+
+    <string name="income">Доходы</string>
+    <string name="outcome">Расходы</string>
+
+    <string name="hint_category">Название</string>
+    <string name="button_save">Сохранить</string>
+    <string name="empty_not_saved">Категория не сохранена, потому что у нее нету нахвания.</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="add_to_budget">Включать в бюджет</string>
+    <string name="choose_category">Выбрать категорию</string>
+
+    <string name="debit_card">Дебет. карта</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
