@@ -12,7 +12,7 @@
 
     <string name="hint_category">Название</string>
     <string name="button_save">Сохранить</string>
-    <string name="empty_not_saved">Категория не сохранена, потому что у нее нету нахвания.</string>
+    <string name="empty_not_saved">Категория не сохранена, потому что у нее нету названия.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -21,6 +21,10 @@
 
     <string name="add_to_budget">Включать в бюджет</string>
     <string name="choose_category">Выбрать категорию</string>
+
+    <string name="error_choose_category">Выберите категорию</string>
+    <string name="error_enter_sum">Введите сумму</string>
+    <string name="error_while_adding">Ошибка при добавлении</string>
 
     <string name="debit_card">Дебет. карта</string>
 

@@ -9,13 +9,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import vlimv.moneymanager.Models.Expense;
+
 /**
  * Created by HP on 25-Oct-18.
  */
 
-@Database(entities = {CategoryEntity.class}, version = 2)
+@Database(entities = {CategoryEntity.class, ExpenseEntity.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
+    public abstract ExpenseDao expenseDao();
+
     private static volatile AppDatabase INSTANCE;
 
     static AppDatabase getDatabase(final Context context) {
@@ -30,6 +34,8 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "category_database")
                             .addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_2_3)
+//                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
@@ -44,6 +50,20 @@ public abstract class AppDatabase extends RoomDatabase {
 
         }
     };
+
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS 'expense_table'" +
+                    "('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    "'category_id' INTEGER NOT NULL," +
+                    "'date' TEXT NOT NULL," +
+                    "'sum' REAL NOT NULL," +
+                    "FOREIGN KEY('category_id') REFERENCES 'category_table'('id'))");
+
+        }
+    };
+//
     private static RoomDatabase.Callback sRoomDatabaseCallback =
             new RoomDatabase.Callback(){
                 @Override
@@ -55,15 +75,29 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-        private final CategoryDao mDao;
+        private final ExpenseDao mDao;
 
         PopulateDbAsync(AppDatabase db) {
-            mDao = db.categoryDao();
+            mDao = db.expenseDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
+//            for (int i = 0; i < 3; i++) {
+//                ExpenseEntity e = new ExpenseEntity(1, "06.09", 20.f);
+//                mDao.insert(e);
+//            }
+//
+//            for (int i = 0; i < 3; i++) {
+//                ExpenseEntity e = new ExpenseEntity(1, "07.09", 40.f);
+//                mDao.insert(e);
+//            }
+//
+//            for (int i = 0; i < 3; i++) {
+//                ExpenseEntity e = new ExpenseEntity(1, "09.09", 10.f);
+//                mDao.insert(e);
+//            }
             return null;
         }
     }

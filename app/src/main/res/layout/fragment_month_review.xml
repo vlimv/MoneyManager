@@ -7,12 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="vlimv.moneymanager.MainPageActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="blabla"
-        android:textColor="@color/red"
-        android:gravity="center"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

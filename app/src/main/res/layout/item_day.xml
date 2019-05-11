@@ -20,17 +20,6 @@
         android:text="25 сентября, Вторник"
         fontPath="fonts/Montserrat-Medium.ttf"/>
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        layout="@layout/layout_expense"/>
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        layout="@layout/layout_expense"/>
-
     <TextView
         android:id="@+id/overall"
         android:layout_width="match_parent"

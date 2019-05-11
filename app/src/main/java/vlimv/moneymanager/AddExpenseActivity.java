@@ -1,12 +1,17 @@
 package vlimv.moneymanager;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,15 +19,23 @@ import com.udojava.evalex.Expression;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import vlimv.moneymanager.Adapters.CategoryGridAdapter;
+import vlimv.moneymanager.Database.CategoryEntity;
+import vlimv.moneymanager.Database.CategoryViewModel;
+import vlimv.moneymanager.Database.ExpenseEntity;
+import vlimv.moneymanager.Database.ExpenseViewModel;
+import vlimv.moneymanager.Models.Expense;
 
 public class AddExpenseActivity extends AppCompatActivity implements View.OnClickListener {
 
     String expression = "";
     TextView resultTextView;
     ArrayList<Button> digitButtons;
+    List<CategoryEntity> categoryEntities;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -66,17 +79,33 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
                 R.color.onyx
         };
 
-        CategoryGridAdapter adapter = new CategoryGridAdapter(AddExpenseActivity.this, web, imageId, colorId);
-        grid = findViewById(R.id.categories_grid);
-        grid.setAdapter(adapter);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(AddExpenseActivity.this, "You Clicked at " + web[+ position], Toast.LENGTH_SHORT).show();
 
+
+        final CategoryGridAdapter gridAdapter = new CategoryGridAdapter(AddExpenseActivity.this);
+        grid = findViewById(R.id.categories_grid);
+        grid.setAdapter(gridAdapter);
+        final CategoryViewModel categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getAllCategories().observe(this, new Observer<List<CategoryEntity>>() {
+            @Override
+            public void onChanged(@Nullable final List<CategoryEntity> categories) {
+                // Update the cached copy of the words in the adapter.
+//                categoryEntities = categories;
+                gridAdapter.setCategories(categories);
             }
         });
+
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                ImageView icon = categoryEntities.get(position).
+//
+//                Toast.makeText(AddExpenseActivity.this, "You Clicked at " + web[+ position], Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+//        });
 
         digitButtons = new ArrayList<>();
         digitButtons.add((Button)findViewById(R.id.digit0));
@@ -108,6 +137,44 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         eraseButton.setOnClickListener(this);
 
         resultTextView = findViewById(R.id.result_text);
+
+        final ExpenseViewModel expenseViewModel = ViewModelProviders.of(this).get(ExpenseViewModel.class);
+
+        Button addExpenseButton = findViewById(R.id.choose_category_button);
+        addExpenseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int chosenCatId = gridAdapter.getChosenCatId();
+                System.out.println("category id: " + chosenCatId);
+                if (chosenCatId == -1) {
+                    Toast.makeText(view.getContext(), R.string.error_choose_category, Toast.LENGTH_LONG).show();
+                } else if (expression == null || expression.isEmpty()) {
+                    Toast.makeText(view.getContext(), R.string.error_enter_sum, Toast.LENGTH_LONG).show();
+                } else {
+//                    CategoryEntity category = categoryViewModel.getCategoryById(chosenCatId);
+                    float sum = Float.parseFloat(expression);
+                    double random = Math.random();
+                    ExpenseEntity expenseEntity;
+                    if (random < 0.333) {
+                        expenseEntity = new ExpenseEntity(chosenCatId,"26.03.2019", sum);
+                    } else if (random >= 0.333 && random < 0.667) {
+                        expenseEntity = new ExpenseEntity(chosenCatId,"28.03.2017", sum);
+                    } else {
+                        expenseEntity = new ExpenseEntity(chosenCatId,"31.03.2019", sum);
+                    }
+
+                    expenseViewModel.insert(expenseEntity);
+
+                    Intent replyIntent = new Intent();
+                    setResult(RESULT_OK, replyIntent);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("expense", expenseEntity);
+                    replyIntent.putExtras(bundle);
+                    finish();
+                }
+
+            }
+        });
 
 
 

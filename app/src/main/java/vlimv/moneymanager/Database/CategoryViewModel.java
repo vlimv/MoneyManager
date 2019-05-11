@@ -12,15 +12,17 @@ import java.util.List;
  */
 
 public class CategoryViewModel extends AndroidViewModel {
-    private CategoryRepository repository;
+    private AppRepository repository;
     private LiveData<List<CategoryEntity>> allCategories;
 
     public CategoryViewModel(@NonNull Application application) {
         super(application);
-        repository = new CategoryRepository(application);
+        repository = new AppRepository(application);
         allCategories = repository.getAllCategories();
     }
 
     public LiveData<List<CategoryEntity>> getAllCategories() { return allCategories; }
     public void insert(CategoryEntity categoryEntity) { repository.insert(categoryEntity); }
+    public CategoryEntity getCategoryById(int id) { return repository.getCategoryById(id);}
+
 }

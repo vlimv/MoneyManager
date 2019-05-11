@@ -22,4 +22,7 @@ public interface CategoryDao {
     @Query("SELECT * from 'category_table'")
     LiveData<List<CategoryEntity>> getAllCategories();
 
+    @Query("SELECT * FROM 'category_table' WHERE id = :id")
+    CategoryEntity getCategoryById(int id);
+
 }
